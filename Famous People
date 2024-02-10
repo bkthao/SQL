@@ -1,10 +1,5 @@
 # In this SQL project I created two tables and joined them together. One consisting of famous people and the other table has their backgrounds. 
 
-CREATE TABLE famous_people (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    fullname TEXT,
-    age TEXT);
-
 INSERT INTO famous_people
     VALUES (1, "Zendaya", 27);
 INSERT INTO famous_people
@@ -15,6 +10,26 @@ INSERT INTO famous_people
     VALUES (4, "Jungkook", 26);
 INSERT INTO famous_people
     VALUES (5, "Selena Gomez", 31);
+INSERT INTO famous_people
+    VALUES (6, "Lee Ji-eun (IU)", 30);
+INSERT INTO famous_people
+    VALUES (7, "Michelle Obama", 60);
+INSERT INTO famous_people
+    VALUES (8, "Sunisa Lee", 20);
+INSERT INTO famous_people
+    VALUES (9, "Simone Biles", 26);
+INSERT INTO famous_people
+    VALUES (10, "Anne Hathaway", 41);
+INSERT INTO famous_people
+    VALUES (11, "Michelle Yeoh", 61);
+INSERT INTO famous_people
+    VALUES (12, "Awkwafina", 35);
+INSERT INTO famous_people
+    VALUES (13, "Constance Wu", 41);
+INSERT INTO famous_people
+    VALUES (14, "Ali Wong", 41);
+INSERT INTO famous_people
+    VALUES (15, "Steven Yeun", 40);
     
 CREATE TABLE backgrounds (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +47,26 @@ INSERT INTO backgrounds
     VALUES (4, "singer", "video editing/photography", "Mandeok-dong, Busan, South Korea");
 INSERT INTO backgrounds
     VALUES (5, "actress/singer", "surf/skateboard", "Grand Prairie, Texas");
+INSERT INTO backgrounds
+    VALUES (6, "singer/songwriting/composer/actress", "read/listen to music", "Songjeong-dong, Seoul, South Korea");
+INSERT INTO backgrounds
+    VALUES (7, "american attorney", "knitting", "Chicago, Illinios");
+INSERT INTO backgrounds
+    VALUES (8, "gymnast", "camping/fishing", "St. Paul, Minnesota");
+INSERT INTO backgrounds
+    VALUES (9, "gymnast","shopping", "Columbus, Ohio");
+INSERT INTO backgrounds
+    VALUES (10, "actress", "hiking/rockclimbing", "Brooklyn, New York");
+INSERT INTO backgrounds
+    VALUES (11, "actress", "playing piano", "Ipoh, Malaysia");
+INSERT INTO backgrounds
+    VALUES (12, "actress/rapper", "video games", "Stony Brook, New York");
+INSERT INTO backgrounds
+    VALUES (13, "actress", "running/camping/piano/reading", "Richmond, Virginia");
+INSERT INTO backgrounds
+    VALUES (14, "actress/comedian", "cooking", "San Francisco, California");
+INSERT INTO backgrounds
+    VALUES (15, "actor", "guitar", "Seoul South Korea");
 
 # What are the careers of these famous people?
 SELECT f.fullname, b.careers
