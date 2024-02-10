@@ -1,0 +1,52 @@
+# In this SQL project I created two tables and joined them together. One consisting of famous people and the other table has their backgrounds. 
+
+CREATE TABLE famous_people (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    age TEXT);
+
+INSERT INTO famous_people
+    VALUES (1, "Zendaya", 27);
+INSERT INTO famous_people
+    VALUES (2, "Tom Holland", 27);
+INSERT INTO famous_people
+    VALUES (3, "Taylor Swift", 34);
+INSERT INTO famous_people
+    VALUES (4, "Jungkook", 26);
+INSERT INTO famous_people
+    VALUES (5, "Selena Gomez", 31);
+    
+CREATE TABLE backgrounds (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    careers TEXT,
+    hobbies TEXT,
+    birth_place TEXT);
+    
+INSERT INTO backgrounds
+    VALUES (1, "actress/singer", "dancing", "Oakland, California");
+INSERT INTO backgrounds
+    VALUES (2, "actor", "dancing", "Kingston upon Thames, United Kingdoms");
+INSERT INTO backgrounds
+    VALUES (3, "singer", "anitque shopping/collecting antiques", "West Reading, Pennsylvania");
+INSERT INTO backgrounds
+    VALUES (4, "singer", "video editing/photography", "Mandeok-dong, Busan, South Korea");
+INSERT INTO backgrounds
+    VALUES (5, "actress/singer", "surf/skateboard", "Grand Prairie, Texas");
+
+# What are the careers of these famous people?
+SELECT f.fullname, b.careers
+FROM famous_people AS f
+JOIN backgrounds AS b
+ON f.id = b.id;
+
+# What are the hobbies these famous people enjoy doing?
+SELECT f.fullname, b.hobbies
+FROM famous_people AS f
+JOIN backgrounds AS b
+ON f.id = b.id;
+
+# Where were these famous people born?
+SELECT f.fullname, b.birth_place
+FROM famous_people AS f
+JOIN backgrounds AS b
+ON f.id = b.id
