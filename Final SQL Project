@@ -1,0 +1,112 @@
+#On my final SQL project for Breaking Into Tech I worked on a dataset called Chinook, which represents a digital media store and includes tables for artists, albums, media tracks, invoices, and customers.
+
+#1. Show Customers (their full names, customer ID, and country) who are not in the US.
+SELECT firstname,
+lastname,
+customerid,
+country
+FROM chinook.customers
+WHERE country <> "USA";
+
+#2. Show only the Customers from Brazil.
+SELECT *
+FROM chinook.customers
+WHERE country = "Brazil";
+
+#3. Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country.
+SELECT c.firstname,
+c.lastname,
+i.invoiceid,
+i.invoicedate,
+i.billingcountry
+FROM chinook.invoices AS i
+LEFT JOIN chinook.customers AS c
+ON i.customerid = c.customerid
+WHERE i.billingcountry = "Brazil";
+
+#4. Show the Employees who are Sales Agents.
+SELECT *
+FROM chinook.employees
+WHERE Title = "Sales Support Agent";
+
+#5. Find a unique/distinct list of billing countries from the Invoice table.
+SELECT DISTINCT billingcountry
+FROM chinook.invoices;
+
+#6. Provide a query that shows the invoices associated with each sales agent. The resulting table should include the Sales Agent's full name.
+SELECT e.firstname, 
+e.lastname,
+i.invoiceid
+FROM chinook.employees AS e
+INNER JOIN chinook.customers AS c ON c.SupportRepId = e.employeeid
+INNER JOIN chinook.invoices AS i ON i.customerid = c.customerid;
+
+#7. Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers.
+SELECT e.lastname,
+e.firstname,
+c.firstname,
+c.lastname,
+c.country,
+i.total
+FROM chinook.employees AS e
+JOIN chinook.customers AS c ON c.supportrepid = e.employeeid
+JOIN chinook.invoices AS i ON i.customerid = c.customerid;
+
+#8. How many Invoices were there in 2009?
+SELECT COUNT(*)
+FROM chinook.invoices
+WHERE invoicedate BETWEEN '2009-01-01' AND '2009-12-31';
+
+#9. What are the total sales for 2009?
+SELECT SUM(total)
+FROM chinook.invoices
+WHERE invoicedate BETWEEN '2009-01-01' AND '2009-12-31';
+
+#10. Write a query that includes the purchased track name with each invoice line ID.
+SELECT t.name,
+i.invoicelineid
+FROM chinook.tracks AS t
+JOIN chinook.invoice_items AS i
+ON i.trackid = t.trackid;
+
+#11. Write a query that includes the purchased track name AND artist name with each invoice line ID.
+SELECT t.name AS Track,
+ar.name AS Artist,
+i.invoicelineid
+FROM chinook.invoice_items AS i
+LEFT JOIN chinook.tracks AS t ON t.trackid = i.trackid
+INNER JOIN chinook.albums AS a ON a.albumid = t.albumid
+LEFT JOIN chinook.artists AS ar ON ar.artistid = a.artistid;
+
+#12. Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+SELECT t.name AS Track_Name,
+a.title AS Album_Title,
+m.name AS Media_Type,
+g.name AS Genre
+FROM chinook.tracks AS t
+INNER JOIN chinook.media_types AS m ON m.mediatypeid = t.mediatypeid
+INNER JOIN chinook.genres AS g ON g.genreid = t.genreid
+INNER JOIN chinook.albums AS a ON a.albumid = t.albumid;
+
+#13. Show the total sales made by each sales agent.
+SELECT e.firstname,
+e.lastname,
+ROUND(SUM(i.total), 2) AS 'Total Sales'
+FROM chinook.employees AS e
+INNER JOIN chinook.customers AS c ON c.supportrepid = e.employeeid
+INNER JOIN chinook.invoices AS i ON i.customerid = c.customerid
+WHERE e.title = 'Sales Support Agent'
+GROUP BY e.firstname;
+
+#14. Which sales agent made the most dollars in sales in 2009?
+SELECT e.firstname AS First_Name,
+e.lastname AS Last_Name,
+ROUND(SUM(i.total), 2) AS 'Total Sales'
+FROM chinook.employees AS e
+INNER JOIN chinook.customers AS c ON c.supportrepid = e.employeeid
+INNER JOIN chinook.invoices AS i ON i.customerid = c.customerid
+WHERE e.title = 'Sales Support Agent'
+AND invoicedate BETWEEN '2009-01-01' AND '2009-12-31'
+GROUP BY e.firstname
+ORDER BY 'Total Sales' desc
+LIMIT 1;
