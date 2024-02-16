@@ -1,0 +1,36 @@
+#This project has me creating a store database base on my own choices from Khan Academy. It has 15 different clothing items available with 6 different columns from id, clothing, price, aisle, category, and quantity.
+
+CREATE TABLE store (id INTEGER, clothing TEXT, price INTEGER, aisle INTEGER, category TEXT, quantity INTEGER);
+
+INSERT INTO store VALUES (1, 'T-shirt', 5.00, 1, 'Tops', 50);
+INSERT INTO store VALUES (2, 'Long sleeve', 7.00, 1, 'Tops', 40);
+INSERT INTO store VALUES (3, 'Polo', 6.00, 1, 'Tops', 35);
+INSERT INTO store VALUES (4, 'Sweater', 15.00, 2, 'Tops', 30);
+INSERT INTO store VALUES (5, 'Hoodie', 20.00, 2, 'Tops', 32);
+INSERT INTO store VALUES (6, 'Jacket', 50.00, 3, 'Outerwear', 25);
+INSERT INTO store VALUES (7, 'Trouser', 45.00, 3, 'Bottoms', 25);
+INSERT INTO store VALUES (8, 'Pant', 25.00, 4, 'Bottoms', 43);
+INSERT INTO store VALUES (9, 'Jean', 23.00, 4, 'Bottoms', 37);
+INSERT INTO store VALUES (10, 'Short', 20.00, 4, 'Bottoms', 19);
+INSERT INTO store VALUES (11, 'Skirt', 17.00, 5, 'Dresses & Skirts', 21);
+INSERT INTO store VALUES (12, 'Dress', 19.00, 5, 'Dresses & Skirts', 34);
+INSERT INTO store VALUES (13, 'Underwear', 4.00, 6, 'Innerwear & Underwear', 101);
+INSERT INTO store VALUES (14, 'Socks', 2.00, 6, 'Innerwear & Underwear', 128);
+INSERT INTO store VALUES (15, 'Shoes', 39.00, 7, 'Shoes', 110);
+
+#What clothing items are less than $30.00?
+SELECT *
+FROM store
+WHERE price <= 30.00
+ORDER BY price desc;
+
+#What sort of clothing items are available from sections 1-5?
+SELECT *
+FROM store
+WHERE aisle <= 5;
+
+#What is the quantity of clothing items available from each category?
+SELECT SUM(quantity) AS inventory,
+category
+FROM store
+GROUP BY category;
